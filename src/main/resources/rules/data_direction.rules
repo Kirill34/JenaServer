@@ -1,0 +1,145 @@
+ [
+ StudentChooseReturnForInputData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasInputData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'return')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Возвращаемое значение вместо входного')
+]
+
+[
+ StudentChooseWriteForInputData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasInputData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'write-only')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Выходное значение вместо входного')
+]
+
+[
+ StudentChooseReadWriteForInputData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasInputData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'read-write')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Обновляемое значение вместо входного')
+]
+
+[
+ StudentReadForOutputData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasOutputData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'read-only')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Входное значение вместо выходного')
+]
+
+[
+ StudentReadWriteForOutputData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasOutputData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'read-write')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Обновляемое значение вместо выходного')
+]
+
+[
+ StudentReadForUpdatableData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'read-only')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Входное значение вместо обновляемого')
+]
+
+[
+ StudentWriteForUpdatableData:
+ (?d rdf:type http://www.semanticweb.org/problem-ontology#DataElement)
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?d)
+(?pres rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+(?d http://www.semanticweb.org/problem-ontology#hasPresentation ?pres)
+(?pres http://www.semanticweb.org/problem-ontology#transferMethod 'write-only')
+-> (?d  http://www.semanticweb.org/problem-ontology#hasError 'Выходное значение вместо обновляемого')
+]
+
+[
+ProblemText:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFormulation ?firstPhrase)
+(?firstPhrase http://www.semanticweb.org/problem-ontology#text ?firstPhraseText)
+noValue(?p http://www.semanticweb.org/problem-ontology#hasFullText ?text)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?firstPhrase)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?firstPhraseText)
+
+]
+
+[
+ProblemHasntFullText:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+noValue(?p,http://www.semanticweb.org/problem-ontology#hasFullText)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '0')
+]
+
+[
+ProblemTextContinue:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?text)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?cp)
+(?cp http://www.semanticweb.org/problem-ontology#next ?next_phrase)
+(?next_phrase http://www.semanticweb.org/problem-ontology#text ?nextText)
+noValue(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '1')
+strConcat(?text,' ',?nextText,?newText)
+->
+remove(1,2)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?next_phrase)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?newText)
+]
+
+[
+ProblemTextFinish:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?cp)
+(?cp http://www.semanticweb.org/problem-ontology#text ?cp_text)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
+noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '1')
+]
+
+[
+DataElementBorders:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
+(?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+(?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
+equal(?lba, ?lb)
+equal(?rba, ?rb)
+->
+print("Element: ",?element,"Its good!!!", ?lba, ?lb)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
+]
+
+
+
