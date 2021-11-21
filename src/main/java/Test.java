@@ -1,8 +1,6 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
@@ -36,18 +34,11 @@ public class Test {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-
             problem.addStudent("1");
-            String text = problem.getFullText();
-            System.out.println(text);
+            //String text = problem.getFullText();
+            //System.out.println(text);
 
             String method = t.getRequestMethod();
-            //System.out.println(t.getRequestHeaders());
-
-
-            //String query = t.getRequestURI().getQuery();
-            //System.out.println(query);
-
 
             System.out.println(t.getRequestBody().toString());
             byte [] b = new byte[1000];
@@ -68,24 +59,30 @@ public class Test {
                     param_value.put(key_value[0], key_value[1]);
                 }
 
-                System.out.println("direction: " + param_value.get("direction"));
+                //System.out.println("direction: " + param_value.get("direction"));
 
                 String interaction = param_value.get("interaction");
-                if (interaction.equals("1")) //Выбор элементов данных
+                if (interaction!=null && interaction.equals("1")) //Выбор элементов данных
                 {
                     String leftBorder = param_value.get("leftBorder");
                     String rightBorder = param_value.get("rightBorder");
-                    problem.chooseDataElementBorders("1", leftBorder, rightBorder);
+                    response = problem.chooseDataElementBorders("1", leftBorder, rightBorder);
                 }
 
-
-                if (method.equals("POST"))
-                    response = requestToJena(param_value);
+                if (param_value.containsKey("fullText"))
+                {
+                    response = problem.getFullText();
+                }
             }
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            OutputStreamWriter ow = new OutputStreamWriter(os, "Cp1251");
+            String respStr = new String(response.getBytes("ISO-8859-1"), "Cp1251");
+            ow.write(respStr);
+            ow.flush();
+            ow.close();
+            //os.write(response.getBytes());
+            //os.close();
         }
 
         private String requestToJena(HashMap<String, String> param_value)

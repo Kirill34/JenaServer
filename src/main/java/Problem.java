@@ -23,6 +23,7 @@ public class Problem {
     protected Model model = null;
     protected OntModel inf = null;
     Reasoner reasoner = null;
+    InfModel infModel = null;
 
     protected static String BASE_URL = "http://www.semanticweb.org/problem-ontology";
     protected static String PROBLEM_ONTOLOGY_FILE = "ProblemOntology.owl";
@@ -208,7 +209,7 @@ public class Problem {
 
     protected void calcModel()
     {
-        InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
+        infModel = ModelFactory.createInfModel(reasoner, (infModel == null) ? inf : infModel);
     }
 
     public Resource addStudent(String id)
@@ -237,22 +238,8 @@ public class Problem {
         {
             Resource student = rs.next().get("?student").asResource();
             return student;
-            /*
-            Resource r = student.asResource();
-
-            if (r.canAs(Individual.class))
-                System.out.println("Individual");
-            else
-                System.out.println("No individual");
-            return (Individual) r;*/
-            //String s = rs.next().toString();
-            //System.out.println(s);
-
         }
         return null;
-
-        //ResultSet resultSet = qExec.execSelect();
-       // resultSet.
     }
 
     public String getFullText()
@@ -283,6 +270,28 @@ public class Problem {
         //return "";
     }
 
+    public boolean studentHasChosenElement(String studentID, String elementName)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#>" +
+                " SELECT (count(?element) as ?cnt)  WHERE {" +
+                " ?student a so:Student ." +
+                " ?student so:hasID \"" + studentID + "\" . " +
+                " ?student so:foundElement ?element ." +
+                " ?element <http://www.semanticweb.org/problem-ontology#name>  \"" + elementName + "\" ." +
+                "}";
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?cnt").asLiteral().getInt();
+            return (s>0);
+        }
+        return false;
+    }
+
     public String chooseDataElementBorders(String studentID, String leftBorderNumLexem, String rightBorderNumLexem)
     {
         Resource student = addStudent(studentID);
@@ -293,11 +302,44 @@ public class Problem {
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasRightBorder"), ResourceFactory.createTypedLiteral(Integer.parseInt(rightBorderNumLexem)));
 
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
-        InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
-        infModel.toString();
+        infModel = ModelFactory.createInfModel(reasoner, inf);
+        //calcModel();
+        //infModel.write(System.out);
+
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?correct WHERE " +
+                "{" +
+                "?student a so:Student ." +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?student so:hasAnswer ?answ. " +
+                "?answ po:hasLeftBorder "+leftBorderNumLexem+" . " +
+                "?answ po:hasRightBorder "+rightBorderNumLexem+" . " +
+                "?answ so:isCorrectAnswer ?correct ." +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            return (s==1) ? "Correct answerб" : "Incorrect answerб";
+        }
 
         return "";
     }
 
+    public String chooseElementDirection(String studentID, String elementName, String direction)
+    {
+        Resource student = addStudent(studentID);
+        Individual answer = inf.createIndividual(inf.createResource());
+        answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasDirection"), direction);
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        infModel = ModelFactory.createInfModel(reasoner, inf);
+        infModel.toString();
+        return "";
+    }
 
 }

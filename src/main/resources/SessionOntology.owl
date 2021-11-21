@@ -45,6 +45,29 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSubject -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSubject"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -91,6 +114,25 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Question_DataDirection_Birthday -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Question_DataDirection_Birthday">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Question"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 
