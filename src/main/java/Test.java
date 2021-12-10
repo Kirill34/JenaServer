@@ -2,13 +2,20 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Validate;
 import sun.misc.IOUtils;
+
+import org.json.JSONObject;
 
 public class Test {
 
@@ -34,13 +41,14 @@ public class Test {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            HashMap<String, String> answ = null;
             problem.addStudent("1");
             //String text = problem.getFullText();
             //System.out.println(text);
 
             String method = t.getRequestMethod();
 
-            System.out.println(t.getRequestBody().toString());
+            //System.out.println(t.getRequestBody().toString());
             byte [] b = new byte[1000];
             InputStream is = t.getRequestBody();
 
@@ -66,19 +74,38 @@ public class Test {
                 {
                     String leftBorder = param_value.get("leftBorder");
                     String rightBorder = param_value.get("rightBorder");
-                    response = problem.chooseDataElementBorders("1", leftBorder, rightBorder);
+                    answ = problem.chooseDataElementBorders("1", leftBorder, rightBorder);
+                    response = answ.get("correct");
                 }
 
                 if (param_value.containsKey("fullText"))
                 {
+                    answ = new HashMap<String, String>();
                     response = problem.getFullText();
+                    answ.put("fulltext", response);
                 }
             }
-            t.sendResponseHeaders(200, response.length());
+
             OutputStream os = t.getResponseBody();
             OutputStreamWriter ow = new OutputStreamWriter(os, "Cp1251");
             String respStr = new String(response.getBytes("ISO-8859-1"), "Cp1251");
-            ow.write(respStr);
+            JSONObject jo = new JSONObject();
+
+            List<String> keys = new ArrayList<String>(answ.keySet());
+            for(int i = 0; i < keys.size(); i++) {
+                String key = keys.get(i);
+                String value = answ.get(key);
+                value = StringEscapeUtils.escapeJava(value);
+                jo.put(key,value);
+            }
+
+            //jo.put("text", StringEscapeUtils.escapeJava(response));
+            String jsonStr = jo.toString();
+
+
+            t.sendResponseHeaders(200, jsonStr.length());
+            //System.out.println(jsonStr);
+            ow.write(jsonStr);
             ow.flush();
             ow.close();
             //os.write(response.getBytes());

@@ -21,6 +21,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"/>
@@ -62,9 +68,27 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundAllElements -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundAllElements"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"/>
     
 
 

@@ -542,7 +542,7 @@
         <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#Birthday"/>
         <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#FirstSchoolDay"/>
         <hasOutputData rdf:resource="http://www.semanticweb.org/problem-ontology#DaysCount"/>
-        <hasFullText>Напишите прототип функции, которая возвращает количество дней между датой рождения и датой первого дня в школе</hasFullText>
+        <hasFullText>Напишите прототип функции, которая находит количество дней между датой рождения и датой первого дня в школе</hasFullText>
     </owl:NamedIndividual>
 </rdf:RDF>
 

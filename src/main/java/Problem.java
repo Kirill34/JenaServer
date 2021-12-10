@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.HashMap;
 
 import static org.apache.jena.ontology.OntModelSpec.OWL_MEM_MICRO_RULE_INF;
 
@@ -232,6 +233,8 @@ public class Problem {
             Individual student = inf.createIndividual(inf.createResource());
             student.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student"));
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasID"), id);
+            student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"), inf.createTypedLiteral(3));
+            //student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"), inf.createTypedLiteral(0));
         }
 
         while (rs.hasNext())
@@ -292,8 +295,11 @@ public class Problem {
         return false;
     }
 
-    public String chooseDataElementBorders(String studentID, String leftBorderNumLexem, String rightBorderNumLexem)
+    public HashMap<String, String> chooseDataElementBorders(String studentID, String leftBorderNumLexem, String rightBorderNumLexem)
     {
+
+        HashMap<String, String> result = new HashMap<String,String>();
+
         Resource student = addStudent(studentID);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
@@ -308,14 +314,15 @@ public class Problem {
 
         String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT ?correct WHERE " +
+                "SELECT ?correct ?message WHERE " +
                 "{" +
                 "?student a so:Student ." +
                 " ?student so:hasID \""+studentID+"\" . " +
                 "?student so:hasAnswer ?answ. " +
                 "?answ po:hasLeftBorder "+leftBorderNumLexem+" . " +
                 "?answ po:hasRightBorder "+rightBorderNumLexem+" . " +
-                "?answ so:isCorrectAnswer ?correct ." +
+                "?answ so:isCorrectAnswer ?correct . " +
+                "?student so:hasMessage ?message . " +
                 "} ";
         Query query = QueryFactory.create(queryString);
         QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
@@ -324,10 +331,45 @@ public class Problem {
         {
             QuerySolution qs = rs.next();
             int s = qs.get("?correct").asLiteral().getInt();
-            return (s==1) ? "Correct answerб" : "Incorrect answerб";
+            result.put("correct", (s==1) ? "true" : "false");
+            result.put("message", qs.get("?message").asLiteral().getString());
+            if (s==1)
+            {
+                String queryStringElementName = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "SELECT ?mission ?element ?notfound WHERE " +
+                        "{ " +
+                        "?phrase a po:Phrase . " +
+                        "?phrase po:hasLeftBorder " + leftBorderNumLexem + " ." +
+                        "?phrase po:hasRightBorder " + rightBorderNumLexem + " ." +
+                        "?phrase po:describe ?element . " +
+                        "?element po:mission ?mission . " +
+                        "?student a so:Student . " +
+                        " ?student so:hasID \""+studentID+"\" . " +
+                        "?student so:notFoundElementsCount ?notfound . " +
+                       // "?student so:currentInteraction ?interaction . " +
+                        "} ";
+                Query queryElementName = QueryFactory.create(queryStringElementName);
+                QueryExecution qExecElementName = QueryExecutionFactory.create(queryElementName, infModel);
+                ResultSet rsElementName = qExecElementName.execSelect();
+                if (rsElementName.hasNext())
+                {
+                    QuerySolution qsElementName  = rsElementName.next();
+                    Literal nameLit = qsElementName.get("?mission").asLiteral();
+                    String name = nameLit.getString();
+                    result.put("mission", name);
+                    Resource element = qsElementName.get("?element").asResource();
+                    student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement"), element);
+                    int notFound = qsElementName.get("?notfound").asLiteral().getInt();
+                    student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount")).changeLiteralObject(notFound);
+                    //int interaction_num = qsElementName.get("?interaction").asLiteral().getInt();
+                    //student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction")).changeLiteralObject(interaction_num);
+                    //result.put("interaction", String.valueOf(interaction_num));
+                }
+            }
         }
 
-        return "";
+        return result;
     }
 
     public String chooseElementDirection(String studentID, String elementName, String direction)
