@@ -256,3 +256,97 @@ greaterThan(?rba, ?rb)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction '1'^^http://www.w3.org/2001/XMLSchema#int )
     print("All elements found")
 ]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "input")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    print("Input data direction CORRECT")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    noValue(?answ http://www.semanticweb.org/problem-ontology#hasDirection "input")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверно")
+    print("Input data direction INCORRECT")
+]
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "output")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    print("Input data direction CORRECT")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    noValue(?answ http://www.semanticweb.org/problem-ontology#hasDirection "output")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверно")
+    print("Input data direction INCORRECT")
+]
+
+
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "updatable")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    print("Input data direction CORRECT")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    noValue(?answ http://www.semanticweb.org/problem-ontology#hasDirection "updatable")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверно")
+    print("Input data direction INCORRECT")
+]

@@ -234,7 +234,7 @@ public class Problem {
             student.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student"));
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasID"), id);
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"), inf.createTypedLiteral(3));
-            //student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"), inf.createTypedLiteral(0));
+            student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"), inf.createTypedLiteral(0));
         }
 
         while (rs.hasNext())
@@ -337,7 +337,7 @@ public class Problem {
             {
                 String queryStringElementName = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                         "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                        "SELECT ?mission ?element ?notfound WHERE " +
+                        "SELECT ?mission ?element ?notfound ?interaction WHERE " +
                         "{ " +
                         "?phrase a po:Phrase . " +
                         "?phrase po:hasLeftBorder " + leftBorderNumLexem + " ." +
@@ -347,7 +347,7 @@ public class Problem {
                         "?student a so:Student . " +
                         " ?student so:hasID \""+studentID+"\" . " +
                         "?student so:notFoundElementsCount ?notfound . " +
-                       // "?student so:currentInteraction ?interaction . " +
+                        "?student so:currentInteraction ?interaction . " +
                         "} ";
                 Query queryElementName = QueryFactory.create(queryStringElementName);
                 QueryExecution qExecElementName = QueryExecutionFactory.create(queryElementName, infModel);
@@ -362,9 +362,9 @@ public class Problem {
                     student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement"), element);
                     int notFound = qsElementName.get("?notfound").asLiteral().getInt();
                     student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount")).changeLiteralObject(notFound);
-                    //int interaction_num = qsElementName.get("?interaction").asLiteral().getInt();
-                    //student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction")).changeLiteralObject(interaction_num);
-                    //result.put("interaction", String.valueOf(interaction_num));
+                    int interaction_num = qsElementName.get("?interaction").asLiteral().getInt();
+                    student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction")).changeLiteralObject(interaction_num);
+                    result.put("interaction", String.valueOf(interaction_num));
                 }
             }
         }
@@ -372,16 +372,43 @@ public class Problem {
         return result;
     }
 
-    public String chooseElementDirection(String studentID, String elementName, String direction)
+    public HashMap<String, String> chooseElementDirection(String studentID, String elementName, String direction)
     {
+        HashMap<String, String> answ = new HashMap<String, String>();
         Resource student = addStudent(studentID);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasDirection"), direction);
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName"), elementName);
         infModel = ModelFactory.createInfModel(reasoner, inf);
+        String queryString="PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?correct ?message WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?student so:hasAnswer ?answ. " +
+                "?answ po:hasElementName \"" + elementName + "\" ." +
+                "?answ po:hasDirection \"" + direction + "\" . " +
+                "?answ so:isCorrectAnswer ?correct . " +
+                "?student so:hasMessage ?message . " +
+                "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            answ.put("correct", (s == 1) ? "true" : "false");
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            answ.put("message", qs.get("?message").asLiteral().getString());
+        }
         infModel.toString();
-        return "";
+        //answ.put("correct","true");
+        return answ;
     }
 
 }

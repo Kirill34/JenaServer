@@ -173,6 +173,18 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasDirection -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDirection"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasElementName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasElementName"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasFinishedText -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFinishedText"/>
@@ -468,7 +480,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
         <mission>Количество дней между датами</mission>
-        <name>days_count</name>
+        <name>dayscount</name>
     </owl:NamedIndividual>
     
 
@@ -496,7 +508,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
         <mission>Первый день в школе</mission>
-        <name>first_school_day</name>
+        <name>firstschooldday</name>
     </owl:NamedIndividual>
     
 

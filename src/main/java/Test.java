@@ -77,6 +77,13 @@ public class Test {
                     answ = problem.chooseDataElementBorders("1", leftBorder, rightBorder);
                     response = answ.get("correct");
                 }
+                if (interaction!=null && interaction.equals("2"))
+                {
+                    System.out.println("Interaction 2");
+                    String elementName = param_value.get("elementName");
+                    String elementDirection = param_value.get("direction");
+                    answ = problem.chooseElementDirection("1", elementName, elementDirection);
+                }
 
                 if (param_value.containsKey("fullText"))
                 {
