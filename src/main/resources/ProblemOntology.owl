@@ -78,6 +78,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasEntityField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasEntityField"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasFormulation -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFormulation"/>
@@ -200,6 +206,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasLeftBorder -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasLeftBorder"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasPresentationName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasPresentationName"/>
     
 
 
@@ -468,8 +480,88 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Birthday">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
         <mission>Дата рождения</mission>
         <name>birthday</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <mission>Дата как сущность из 3 полей: день, месяц, год</mission>
+        <name>entity</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
+        <mission>Дата как 3 отедльных числа: день, месяц, год</mission>
+        <name>freefields</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <mission>Дата как 2 отдельных числа: день и месяц</mission>
+        <name>freefields2</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <mission>Номер дня</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <mission>Номер месяца</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_YearNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber"/>
+        <mission>Номер года</mission>
+        <name>year</name>
     </owl:NamedIndividual>
     
 
@@ -489,7 +581,28 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_Date">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Entity"/>
+        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
+        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
         <name>date</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_DayNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <name>Номер дня</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <name>Номер месяца</name>
     </owl:NamedIndividual>
     
 
@@ -502,11 +615,30 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_Sequence_Date -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_Sequence_Date">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#List"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_YearNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <name>Номер года</name>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#FirstSchoolDay -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#FirstSchoolDay">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence"/>
         <mission>Первый день в школе</mission>
         <name>firstschooldday</name>
     </owl:NamedIndividual>

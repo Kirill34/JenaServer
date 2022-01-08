@@ -85,6 +85,13 @@ public class Test {
                     answ = problem.chooseElementDirection("1", elementName, elementDirection);
                 }
 
+                if (interaction!=null && interaction.equals("3"))
+                {
+                    String elementName = param_value.get("elementName");
+                    String presentationName = param_value.get("presentationName");
+                    answ = problem.choosePresentationForDataElement("1", elementName, presentationName);
+                }
+
                 if (param_value.containsKey("fullText"))
                 {
                     answ = new HashMap<String, String>();

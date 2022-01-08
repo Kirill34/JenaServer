@@ -333,6 +333,7 @@ public class Problem {
             int s = qs.get("?correct").asLiteral().getInt();
             result.put("correct", (s==1) ? "true" : "false");
             result.put("message", qs.get("?message").asLiteral().getString());
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             if (s==1)
             {
                 String queryStringElementName = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
@@ -391,6 +392,46 @@ public class Problem {
                 "?student so:hasAnswer ?answ. " +
                 "?answ po:hasElementName \"" + elementName + "\" ." +
                 "?answ po:hasDirection \"" + direction + "\" . " +
+                "?answ so:isCorrectAnswer ?correct . " +
+                "?student so:hasMessage ?message . " +
+                "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            answ.put("correct", (s == 1) ? "true" : "false");
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            answ.put("message", qs.get("?message").asLiteral().getString());
+        }
+        infModel.toString();
+        //answ.put("correct","true");
+        return answ;
+    }
+
+    public HashMap<String, String> choosePresentationForDataElement(String studentID, String elementName, String presentationName)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        Individual answer = inf.createIndividual(inf.createResource());
+        answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName"), elementName);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasPresentationName"), presentationName);
+        infModel = ModelFactory.createInfModel(reasoner, inf);
+
+        String queryString="PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?correct ?message WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?student so:hasAnswer ?answ. " +
+                "?answ po:hasElementName \"" + elementName + "\" ." +
+                "?answ po:hasPresentationName \"" + presentationName + "\" . " +
                 "?answ so:isCorrectAnswer ?correct . " +
                 "?student so:hasMessage ?message . " +
                 "}";
