@@ -1,0 +1,162 @@
+
+[
+    DataElementPresentationIsGood:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    equal(?domainType, ?component)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount 1)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasIdentity ?domainType)
+]
+
+[
+    FieldsCountInEntity:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasEntityField ?field)
+    noValue(?domainType http://www.semanticweb.org/problem-ontology#hasFieldCount)
+    ->
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFieldCount 0)
+]
+
+[
+    AddFieldsCountInEntity:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasEntityField ?field)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFieldCount ?cnt)
+    noValue(?field http://www.semanticweb.org/problem-ontology#isChecked)
+    addOne(?cnt, ?newCnt)
+    ->
+    (?field http://www.semanticweb.org/problem-ontology#isChecked 1)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFieldCount ?newCnt)
+]
+
+[
+    ComponentCountInPresentation:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount 0)
+]
+
+[
+    AddComponentCount:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    noValue(?component http://www.semanticweb.org/problem-ontology#isChecked)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?cnt)
+    addOne(?cnt, ?newCnt)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?newCnt)
+    (?component http://www.semanticweb.org/problem-ontology#isChecked 1)
+    print("Component count: ",?newCnt, " component: ", ?component)
+    print("Presentation: ",?presentation)
+]
+
+[
+    ScalarPresentationIsEqualToEntity:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasSimilarComponentCount)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasSimilarComponentCount 0)
+]
+
+[
+    ScalarPresentationIsEqualToEntity:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasEntityField ?field)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    equal(?field, ?component)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasSimilarComponentCount ?cnt)
+    addOne(?cnt, ?newCnt)
+    noValue(?component http://www.semanticweb.org/problem-ontology#isCheckedEqual)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasSimilarComponentCount ?newCnt)
+    (?component http://www.semanticweb.org/problem-ontology#isCheckedEqual 1)
+]
+
+[
+    EqualCountOfElements:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasSimilarComponentCount ?simcnt)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?cnt)
+    equal(?cnt, ?simcnt)
+    ->
+    (?element http://www.semanticweb.org/problem-ontology#hasAceptablePresentation ?presentation)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasEntityField ?field)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?field)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasIdentity ?domainType)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasNotComponent ?field)
+]
+
+[
+    StudentAnswerPresentation:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presentationName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presentationName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasNotComponent ?field)
+    (?field http://www.semanticweb.org/problem-ontology#mission ?fieldMission)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasIdentity ?domainType)
+    strConcat("Выбранный вариант не подходит, т.к. не содержит поля ",?fieldMission, ?studMsg)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?studMsg)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    StudentAnswerPresentation:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presentationName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presentationName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasIdentity ?domainType)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
