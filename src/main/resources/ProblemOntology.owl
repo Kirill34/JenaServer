@@ -493,7 +493,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_Date"/>
         <mission>Дата как сущность из 3 полей: день, месяц, год</mission>
         <name>entity</name>
     </owl:NamedIndividual>
@@ -529,6 +529,17 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_Date -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_Date">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <mission>дата</mission>
+        <name>date</name>
     </owl:NamedIndividual>
     
 

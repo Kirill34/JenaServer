@@ -51,19 +51,42 @@
 ]
 
 [
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    noValue(?component http://www.semanticweb.org/problem-ontology#isCheckedComponent)
+    ->
+    (?component http://www.semanticweb.org/problem-ontology#isCheckedComponent 0)
+]
+
+[
     AddComponentCount:
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
     (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
     (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
     (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
-    noValue(?component http://www.semanticweb.org/problem-ontology#isChecked)
+    (?component http://www.semanticweb.org/problem-ontology#isCheckedComponent 0)
     (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?cnt)
     addOne(?cnt, ?newCnt)
     ->
+    remove(4)
     (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?newCnt)
-    (?component http://www.semanticweb.org/problem-ontology#isChecked 1)
-    print("Component count: ",?newCnt, " component: ", ?component)
-    print("Presentation: ",?presentation)
+    (?component http://www.semanticweb.org/problem-ontology#isCheckedComponent 1)
+]
+
+[
+    ComponentCountIsFinished:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    noValue(?component http://www.semanticweb.org/problem-ontology#isCheckedComponent 0)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?cnt)
+    greaterThan(?cnt, 0)
+    ->
+    print("Presentation: ", ?presentation, " Component count: ", ?cnt)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFinishedCount 1)
 ]
 
 [
@@ -108,6 +131,15 @@
     equal(?cnt, ?simcnt)
     ->
     (?element http://www.semanticweb.org/problem-ontology#hasAceptablePresentation ?presentation)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponentCount ?cnt)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFinishedCount 1)
 ]
 
 [
