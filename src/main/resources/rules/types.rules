@@ -1,0 +1,7 @@
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasTypeName ?typeName)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+
+    ->
+    print("triggerd")
+]

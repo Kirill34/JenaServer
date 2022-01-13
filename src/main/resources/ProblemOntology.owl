@@ -22,6 +22,24 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#chosePresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosePresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#chosenComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosenComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#chosenPresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosenPresentation"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#describe -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#describe"/>
@@ -168,6 +186,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#ofDataElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofDataElement"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -176,6 +200,12 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasComponentName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasComponentName"/>
     
 
 
@@ -218,6 +248,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasRightBorder -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasRightBorder"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasTransferMethod -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasTransferMethod"/>
     
 
 
@@ -394,9 +430,21 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#ParameterChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ParameterChoose"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#Phrase -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Phrase"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#PresentationChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#PresentationChoose"/>
     
 
 
@@ -533,6 +581,27 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays"/>
+        <name>number</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
+        <mission>Количество дней</mission>
+        <name>count_of_days</name>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#DataElement_Date -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_Date">
@@ -582,6 +651,8 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DaysCount">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number"/>
         <mission>Количество дней между датами</mission>
         <name>dayscount</name>
     </owl:NamedIndividual>
@@ -622,6 +693,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <name>Интервал между датами в днях</name>
     </owl:NamedIndividual>
     
 
@@ -649,7 +721,8 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
-        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
         <mission>Первый день в школе</mission>
         <name>firstschooldday</name>
     </owl:NamedIndividual>

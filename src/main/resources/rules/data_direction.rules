@@ -194,3 +194,4 @@ noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
     print("Input data direction INCORRECT")
 ]
 
+

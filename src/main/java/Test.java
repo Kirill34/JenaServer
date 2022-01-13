@@ -77,6 +77,7 @@ public class Test {
                     answ = problem.chooseDataElementBorders("1", leftBorder, rightBorder);
                     response = answ.get("correct");
                 }
+
                 if (interaction!=null && interaction.equals("2"))
                 {
                     System.out.println("Interaction 2");
@@ -92,11 +93,40 @@ public class Test {
                     answ = problem.choosePresentationForDataElement("1", elementName, presentationName);
                 }
 
+                if (interaction!=null && interaction.equals("4"))
+                {
+                    String elementName = param_value.get("elementName");
+                    String componentName = param_value.get("componentName");
+                    String transferMethod = param_value.get("transferMethod");
+                    answ = problem.chooseParameterOrReturnValue("1", elementName, componentName, transferMethod);
+                }
+
+                if (interaction!=null && interaction.equals("5"))
+                {
+                    String paramName = param_value.get("parameter");
+                    String typeName = param_value.get("type");
+                    answ = problem.chooseParameterType("1", paramName, typeName);
+                }
+
                 if (param_value.containsKey("fullText"))
                 {
                     answ = new HashMap<String, String>();
                     response = problem.getFullText();
                     answ.put("fulltext", response);
+                }
+
+                if (param_value.containsKey("componentList"))
+                {
+                    answ = problem.getStudentComponents("1");
+                }
+                if (param_value.containsKey("paramList"))
+                {
+                    answ = new HashMap<String, String>();
+                    ArrayList<String> studentParams = problem.getStudentParameters("1");
+                    for (String p:
+                         studentParams) {
+                        answ.put(p,"");
+                    }
                 }
             }
 

@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.apache.jena.ontology.OntModelSpec.OWL_MEM_MICRO_RULE_INF;
 
@@ -30,10 +32,13 @@ public class Problem {
     protected static String BASE_URL = "http://www.semanticweb.org/problem-ontology";
     protected static String PROBLEM_ONTOLOGY_FILE = "ProblemOntology.owl";
     protected static String SESSION_ONTOLOGY_FILE = "SessionOntology.owl";
+    protected static String LANGUAGE_ONTOLOGY_FILE = "LanguageOntology.owl";
 
     protected static String DATA_DIRECTION_RULES = "rules/data_direction.rules";
     protected static String ELEMENT_BORDERS_RULES = "rules/element_borders.rules";
     protected static String DATA_PRESENTATION_RULES = "rules/data_presentation.rules";
+    protected static String PARAMETERS_RETURNS_RULES = "rules/parameters_returns.rules";
+    protected static String TYPES_RULES = "rules/types.rules";
 
     protected static String DATA_TRANSFER_METHOD_RETURN = "return";
     protected static String DATA_TRANSFER_METHOD_READ_ONLY = "read-only";
@@ -76,7 +81,9 @@ public class Problem {
     {
         Model problemModel = readModel(PROBLEM_ONTOLOGY_FILE);
         Model sessionModel = readModel(SESSION_ONTOLOGY_FILE);
+        Model languageModel = readModel(LANGUAGE_ONTOLOGY_FILE);
         model = ModelFactory.createUnion(problemModel, sessionModel);
+        model = ModelFactory.createUnion(model, languageModel);
 
 
         //Ризонер для интеракции 0 "Выделение элементов данных из текста"
@@ -87,6 +94,12 @@ public class Problem {
 
         //Ризонер для интеракции 2 "Представления элементов данных"
         reasoners[2] = createReasonerForInteraction(DATA_PRESENTATION_RULES);
+
+        //Ризонер для интеракции 3 "Выбор параметров и возвращаемых значений"
+        reasoners[3] = createReasonerForInteraction(PARAMETERS_RETURNS_RULES);
+
+        //Ризонер для интерации 4 "Выбор типов параметров и возвращаемого значения"
+        reasoners[4] = createReasonerForInteraction(TYPES_RULES);
 
 
         inf = ModelFactory.createOntologyModel( OWL_MEM_MICRO_RULE_INF, model);
@@ -151,6 +164,164 @@ public class Problem {
         {
             Resource student = rs.next().get("?student").asResource();
             return student;
+        }
+        return null;
+    }
+
+    private void setPresenatitionForStudent(String studentID, String dataElementName, String presentationName)
+    {
+        Resource student = addStudent(studentID);
+        Resource dataElement = findDataElementByName(dataElementName);
+        Resource presentation = findDataElementPresentationByName(dataElementName, presentationName);
+
+        Individual presentationChoose = inf.createIndividual(inf.createResource());
+        presentationChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#PresentationChoose"));
+        presentationChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#ofDataElement"), dataElement);
+        presentationChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosenPresentation"), presentation);
+        presentationChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosePresentation"), presentation);
+        System.out.println("Student: "+studentID+" choose presentation "+presentationName );
+    }
+
+    private void addParameterForStudent(String studentID, String elementName, String componentName)
+    {
+        Resource student = addStudent(studentID);
+        Resource component = findComponentByName(studentID, elementName, componentName);
+
+        Individual parameterChoose = inf.createIndividual(inf.createResource());
+        parameterChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#ParameterChoose"));
+        parameterChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosenComponent"), component);
+        parameterChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
+        parameterChoose.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), elementName + "_" + componentName);
+    }
+
+    public HashMap<String, String> getStudentComponents(String studentID)
+    {
+        HashMap<String, String> components = new HashMap<>();
+
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?dename ?demission ?name ?mission WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?choose a po:PresentationChoose . " +
+                "?choose so:ofStudent ?student . " +
+                "?choose po:ofDataElement ?de . " +
+                "?choose po:chosenPresentation ?pres . " +
+                "?de po:hasPresentation ?pres . " +
+                "?de a po:DataElement . " +
+                "?de po:name ?dename . " +
+                "?de po:mission ?demission . " +
+                "?pres po:hasComponent ?comp . " +
+                "?comp po:name ?name ." +
+                "?comp po:mission ?mission . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        while (rs.hasNext())
+        {
+            System.out.println("Number count: "+rs.getRowNumber());
+            QuerySolution qs = rs.next();
+            components.put(qs.get("?dename") + "." + qs.get("?name").toString(), qs.get("?demission") + "." + qs.get("?mission").toString());
+        }
+        System.out.println("Components: ");
+        System.out.println(components);
+        return components;
+    }
+
+    public ArrayList<String> getStudentParameters(String studentID)
+    {
+        ArrayList<String> parameters = new ArrayList<String>();
+
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?name WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?choose a po:ParameterChoose . " +
+                "?choose po:name ?name . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        while (rs.hasNext())
+        {
+            System.out.println("Number count: "+rs.getRowNumber());
+            QuerySolution qs = rs.next();
+            parameters.add(qs.get("?name").toString());
+        }
+
+        return parameters;
+    }
+
+    private Resource findDataElementByName(String name)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?de WHERE " +
+                "{" +
+                "?de a po:DataElement . " +
+                "?problem a po:Problem . " +
+                "?de po:name " + "\"" + name + "\" . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            return rs.next().get("?de").asResource();
+        }
+        return null;
+    }
+
+    private Resource findDataElementPresentationByName(String dataElementName, String presentationName)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?pres WHERE " +
+                "{" +
+                "?de a po:DataElement . " +
+                "?problem a po:Problem . " +
+                "?de po:name " + "\"" + dataElementName + "\" . " +
+                "?de po:hasPresentation ?pres . " +
+                "?pres po:name " + "\"" + presentationName + "\" . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            return rs.next().get("?pres").asResource();
+        }
+        return null;
+    }
+
+    private Resource findComponentByName(String studentID, String dataElementName, String componentName)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?comp WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                "?student so:hasID \"" + studentID + "\" . " +
+                "?prchoose a po:PresentationChoose . " +
+                "?prchoose po:ofDataElement ?de . " +
+                "?prchoose po:chosenPresentation ?pres . " +
+                "?de a po:DataElement . " +
+                "?problem a po:Problem . " +
+                "?de po:name " + "\"" + dataElementName + "\" . " +
+                "?pres po:hasComponent ?comp . " +
+                "?comp po:name \"" + componentName + "\" . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            return rs.next().get("?comp").asResource();
         }
         return null;
     }
@@ -331,8 +502,9 @@ public class Problem {
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName"), elementName);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasPresentationName"), presentationName);
-        infModel = ModelFactory.createInfModel(reasoners[2], inf);
+       // infModel = ModelFactory.createInfModel(reasoners[2], inf);
 
+        /*
         String queryString="PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
                 "SELECT ?correct ?message WHERE " +
@@ -358,9 +530,106 @@ public class Problem {
             answ.put("message", qs.get("?message").asLiteral().getString());
         }
         infModel.toString();
+         */
+        answ.put("correct","true");
+        answ.put("message","Верно");
+
+        setPresenatitionForStudent(studentID, elementName, presentationName);
 
         //answ.put("correct","true");
         return answ;
     }
 
+    public HashMap<String, String> chooseParameterOrReturnValue(String studentID, String elementName, String componentName, String parameterOrReturn)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        Individual answer = inf.createIndividual(inf.createResource());
+        answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName"), elementName);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasComponentName"), componentName);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasTransferMethod"), parameterOrReturn);
+        infModel = ModelFactory.createInfModel(reasoners[3], inf);
+
+        String queryString=
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?correct ?message WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?student so:hasAnswer ?answ. " +
+                "?answ po:hasComponentName \"" + componentName + "\" ." +
+                "?answ po:hasTransferMethod \"" + parameterOrReturn + "\" . " +
+                "?answ so:isCorrectAnswer ?correct . " +
+                "?answ so:hasMessage ?message . " +
+                "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            answ.put("correct", (s == 1) ? "true" : "false");
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            answ.put("message", qs.get("?message").asLiteral().getString());
+
+            if (s==1 && (parameterOrReturn.equals("read-only") || parameterOrReturn.equals("write-only") || parameterOrReturn.equals("read-write")))
+            {
+                addParameterForStudent(studentID, elementName, componentName);
+            }
+        }
+        infModel.toString();
+
+        //answ.put("correct","true");
+        return answ;
+    }
+
+    public HashMap<String, String> chooseParameterType(String studentID, String parameterName, String typeName)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        Individual type = inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName);
+
+        Individual answer = inf.createIndividual(inf.createResource());
+        answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#ofParameterWithName"), parameterName);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasTypeName"), typeName);
+
+        infModel = ModelFactory.createInfModel(reasoners[4], inf);
+
+        String queryString=
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "SELECT ?correct ?message WHERE " +
+                        "{" +
+                        "?student a so:Student . " +
+                        " ?student so:hasID \""+studentID+"\" . " +
+                        "?student so:hasAnswer ?answ. " +
+                        "?answ po:ofParameterWithName \"" + parameterName + "\" ." +
+                        "?answ po:hasTypeName \"" + typeName + "\" . " +
+                        "?answ so:isCorrectAnswer ?correct . " +
+                        "?answ so:hasMessage ?message . " +
+                        "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            answ.put("correct", (s == 1) ? "true" : "false");
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            answ.put("message", qs.get("?message").asLiteral().getString());
+
+        }
+        infModel.toString();
+
+        return answ;
+    }
 }
