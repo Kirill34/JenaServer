@@ -172,6 +172,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasType"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasUpdatableParameter -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasUpdatableParameter">
@@ -687,6 +693,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</minValue>
         <name>Номер дня</name>
     </owl:NamedIndividual>
     
@@ -696,6 +704,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">12</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</minValue>
         <name>Номер месяца</name>
     </owl:NamedIndividual>
     
@@ -705,6 +715,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</minValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">74000</minValue>
         <name>Интервал между датами в днях</name>
     </owl:NamedIndividual>
     
@@ -722,6 +734,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">2100</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1900</minValue>
         <name>Номер года</name>
     </owl:NamedIndividual>
     

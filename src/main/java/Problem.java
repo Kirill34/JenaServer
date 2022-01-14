@@ -599,6 +599,7 @@ public class Problem {
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#ofParameterWithName"), parameterName);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasTypeName"), typeName);
+        answer.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasType"), type);
 
         infModel = ModelFactory.createInfModel(reasoners[4], inf);
 

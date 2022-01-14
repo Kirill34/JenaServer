@@ -1,7 +1,71 @@
 [
-    (?answ http://www.semanticweb.org/problem-ontology#hasTypeName ?typeName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
     (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
-
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?minNeed)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?maxNeed)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max  ?maxType)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min ?minType)
+    print("MAX Need: ",?maxNeed, "MAX Allow: ",?maxType)
+    print("MIN Need: ",?minNeed, "MIN Allow: ",?minType)
+    le(?maxNeed, ?maxType)
     ->
-    print("triggerd")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?minNeed)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?maxNeed)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max  ?maxType)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min ?minType)
+    print("MAX Need: ",?maxNeed, "MAX Allow: ",?maxType)
+    print("MIN Need: ",?minNeed, "MIN Allow: ",?minType)
+    greaterThan(?maxNeed, ?maxType)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выбранный тип разве позволяет покрыть весь необходимый диапазон?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать вещественный тип? Число же целое.")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0.5)
+]
+
+[
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    ->
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '−2147483648'^^http://www.w3.org/2001/XMLSchema#long)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '2147483647'^^http://www.w3.org/2001/XMLSchema#long)
+    print("Min and max for INT")
+]
+
+[
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    ->
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '−128'^^http://www.w3.org/2001/XMLSchema#long)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '127'^^http://www.w3.org/2001/XMLSchema#long)
 ]
