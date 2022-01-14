@@ -472,6 +472,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#ReturnValueChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ReturnValueChoose"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#Scalar -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Scalar">

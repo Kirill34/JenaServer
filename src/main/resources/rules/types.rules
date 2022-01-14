@@ -87,6 +87,29 @@
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
 
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать массив? Значение же скалярное")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
 
 
 [
@@ -171,4 +194,97 @@
     ->
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '0'^^http://www.w3.org/2001/XMLSchema#long)
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '255'^^http://www.w3.org/2001/XMLSchema#long)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Struct)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Struct)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать структура для хранения скалярного значения?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как можно поместить сложную сущность в одно скалярное значение?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать массив для хранения сложной сущности?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]

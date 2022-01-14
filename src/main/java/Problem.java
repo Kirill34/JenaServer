@@ -195,6 +195,17 @@ public class Problem {
         parameterChoose.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), elementName + "_" + componentName);
     }
 
+    private void addReturnValueForStudent(String studentID, String elementName, String componentName)
+    {
+        Resource student = addStudent(studentID);
+        Resource component = findComponentByName(studentID, elementName, componentName);
+
+        Individual returnValueChoose = inf.createIndividual(inf.createResource());
+        returnValueChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#ParameterChoose"));
+        returnValueChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosenComponent"), component);
+        returnValueChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
+    }
+
     public HashMap<String, String> getStudentComponents(String studentID)
     {
         HashMap<String, String> components = new HashMap<>();
@@ -580,6 +591,10 @@ public class Problem {
             if (s==1 && (parameterOrReturn.equals("read-only") || parameterOrReturn.equals("write-only") || parameterOrReturn.equals("read-write")))
             {
                 addParameterForStudent(studentID, elementName, componentName);
+            }
+            if (s==1 && parameterOrReturn.equals("return"))
+            {
+                addReturnValueForStudent(studentID, elementName, componentName);
             }
         }
         infModel.toString();
