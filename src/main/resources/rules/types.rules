@@ -4,6 +4,46 @@
     (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
     (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
     (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?minNeed)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?maxNeed)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max  ?maxType)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min ?minType)
+    print("MAX Need: ",?maxNeed, "MAX Allow: ",?maxType)
+    print("MIN Need: ",?minNeed, "MIN Allow: ",?minType)
+    le(?maxNeed, ?maxType)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned)
+    ge(?minNeed, 0)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
     (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
@@ -14,9 +54,62 @@
     print("MAX Need: ",?maxNeed, "MAX Allow: ",?maxType)
     print("MIN Need: ",?minNeed, "MIN Allow: ",?minType)
     le(?maxNeed, ?maxType)
+    noValue(?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned)
+    ge(?minNeed, 0)
     ->
-    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно, но лучше использовать беззнаковый тип, поскольку этот параметр может принимать только положительные значения")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointsTo)
+    (?pointsTo rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Обычно указатели используют для передачи массивов или выходных параметров? Вам зачем указатель?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+
+    (?pres http://www.semanticweb.org/problem-ontology#hasComponent ?comp)
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?pres)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как вы собираетесь выводить <> из функции? Вы же передали по значению...")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
 
 [
@@ -57,6 +150,7 @@
 
 [
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    noValue(?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned)
     ->
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '−2147483648'^^http://www.w3.org/2001/XMLSchema#long)
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '2147483647'^^http://www.w3.org/2001/XMLSchema#long)
@@ -65,7 +159,16 @@
 
 [
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    noValue(?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned)
     ->
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '−128'^^http://www.w3.org/2001/XMLSchema#long)
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '127'^^http://www.w3.org/2001/XMLSchema#long)
+]
+
+[
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned)
+    ->
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min  '0'^^http://www.w3.org/2001/XMLSchema#long)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max '255'^^http://www.w3.org/2001/XMLSchema#long)
 ]
