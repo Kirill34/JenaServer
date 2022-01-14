@@ -257,6 +257,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasTypeName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasTypeName"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#maxValue -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#maxValue"/>
@@ -278,6 +284,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#name -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#name"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ofParameterWithName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofParameterWithName"/>
     
 
 
