@@ -113,7 +113,8 @@ public class Test {
 
                 if (interaction!=null && interaction.equals("6"))
                 {
-                    String lexemSequence = param_value.get("lexems");
+                    String lexemType = param_value.get("lexemType");
+                    String lexemValue = param_value.get("lexemValue");
                 }
 
                 if (param_value.containsKey("fullText"))

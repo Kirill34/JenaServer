@@ -694,4 +694,11 @@ public class Problem {
 
         return answ;
     }
+
+    public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemName, String lexemValue)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        return answ;
+    }
 }
