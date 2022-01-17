@@ -315,3 +315,13 @@
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать массив для хранения сложной сущности?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofReturnValue 1)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]

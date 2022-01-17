@@ -105,7 +105,15 @@ public class Test {
                 {
                     String paramName = param_value.get("parameter");
                     String typeName = param_value.get("type");
-                    answ = problem.chooseParameterType("1", paramName, typeName);
+                    if (paramName.equals("return"))
+                        answ = problem.chooseReturnValuetype("1", typeName);
+                    else
+                        answ = problem.chooseParameterType("1", paramName, typeName);
+                }
+
+                if (interaction!=null && interaction.equals("6"))
+                {
+                    String lexemSequence = param_value.get("lexems");
                 }
 
                 if (param_value.containsKey("fullText"))

@@ -201,7 +201,7 @@ public class Problem {
         Resource component = findComponentByName(studentID, elementName, componentName);
 
         Individual returnValueChoose = inf.createIndividual(inf.createResource());
-        returnValueChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#ParameterChoose"));
+        returnValueChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#ReturnValueChoose"));
         returnValueChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosenComponent"), component);
         returnValueChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
     }
@@ -627,6 +627,52 @@ public class Problem {
                         " ?student so:hasID \""+studentID+"\" . " +
                         "?student so:hasAnswer ?answ. " +
                         "?answ po:ofParameterWithName \"" + parameterName + "\" ." +
+                        "?answ po:hasTypeName \"" + typeName + "\" . " +
+                        "?answ so:isCorrectAnswer ?correct . " +
+                        "?answ so:hasMessage ?message . " +
+                        "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            int s = qs.get("?correct").asLiteral().getInt();
+            answ.put("correct", (s == 1) ? "true" : "false");
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            answ.put("message", qs.get("?message").asLiteral().getString());
+
+        }
+        infModel.toString();
+
+        return answ;
+    }
+
+    public HashMap<String, String> chooseReturnValuetype(String studentID, String typeName)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        Individual type = inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName);
+
+        Individual answer = inf.createIndividual(inf.createResource());
+        answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
+        student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#ofReturnValue"),inf.createTypedLiteral(1) );
+        answer.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasType"), type);
+        answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasTypeName"), typeName);
+
+        infModel = ModelFactory.createInfModel(reasoners[4], inf);
+
+        String queryString=
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "SELECT ?correct ?message WHERE " +
+                        "{" +
+                        "?student a so:Student . " +
+                        " ?student so:hasID \""+studentID+"\" . " +
+                        "?student so:hasAnswer ?answ. " +
+                        "?answ po:ofReturnValue 1 ." +
                         "?answ po:hasTypeName \"" + typeName + "\" . " +
                         "?answ so:isCorrectAnswer ?correct . " +
                         "?answ so:hasMessage ?message . " +

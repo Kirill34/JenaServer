@@ -299,6 +299,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#ofReturnValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofReturnValue"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#range -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#range"/>
