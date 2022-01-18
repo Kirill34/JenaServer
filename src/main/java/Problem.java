@@ -695,10 +695,52 @@ public class Problem {
         return answ;
     }
 
-    public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemName, String lexemValue)
+    public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemType, String lexemValue)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
         Resource student = addStudent(studentID);
+        Resource code = getStudentsPrototypeCode(studentID);
+        Resource lexem = createLexemByTypeAndName(lexemType, lexemValue);
         return answ;
     }
+
+    public Resource createLexemByTypeAndName(String lexemType, String lexemValue)
+    {
+        Individual lexem = inf.createIndividual(inf.createResource());
+        lexem.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+lexemType));
+        lexem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value"), inf.createTypedLiteral(lexemValue));
+        return lexem;
+    }
+
+    public Resource getStudentsPrototypeCode(String studentID)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#> " +
+                "SELECT ?code WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                "?student so:hasID \"" + studentID + "\" . " +
+                "?code a lo:PrototypeCode . " +
+                "?code so:ofStudent ?student . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            return rs.next().get("?code").asResource();
+        }
+        return createPrototypeCodeForStudent(studentID);
+    }
+
+    private Resource createPrototypeCodeForStudent(String studentID)
+    {
+        Individual code = inf.createIndividual(inf.createResource());
+        Resource student = addStudent(studentID);
+        code.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
+        code.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode"));
+        return code;
+    }
+
 }

@@ -115,6 +115,7 @@ public class Test {
                 {
                     String lexemType = param_value.get("lexemType");
                     String lexemValue = param_value.get("lexemValue");
+                    answ = problem.addLexemToPrototypeCode("1", lexemType, lexemValue);
                 }
 
                 if (param_value.containsKey("fullText"))
