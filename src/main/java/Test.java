@@ -113,9 +113,17 @@ public class Test {
 
                 if (interaction!=null && interaction.equals("6"))
                 {
-                    String lexemType = param_value.get("lexemType");
-                    String lexemValue = param_value.get("lexemValue");
-                    answ = problem.addLexemToPrototypeCode("1", lexemType, lexemValue);
+                    String action = param_value.get("action");
+                    if (action.equals("push"))
+                    {
+                        String lexemType = param_value.get("lexemType");
+                        String lexemValue = param_value.get("lexemValue");
+                        answ = problem.addLexemToPrototypeCode("1", lexemType, lexemValue);
+                    }
+                    if (action.equals("pop"))
+                    {
+                        answ = problem.removeLastLexemFromPrototypeCode("1");
+                    }
                 }
 
                 if (param_value.containsKey("fullText"))

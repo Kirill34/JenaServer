@@ -1,3 +1,4 @@
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -695,13 +696,121 @@ public class Problem {
         return answ;
     }
 
+    public HashMap<String, String> removeLastLexemFromPrototypeCode(String studentID)
+    {
+        HashMap<String, String> answ = new HashMap<String, String>();
+        Resource student = addStudent(studentID);
+        Resource code = getStudentsPrototypeCode(studentID);
+        removeLastLexem(code);
+        answ.put("correct","true");
+        answ.put("message",getLexemSequenceString(code));
+        return answ;
+    }
     public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemType, String lexemValue)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
         Resource student = addStudent(studentID);
         Resource code = getStudentsPrototypeCode(studentID);
         Resource lexem = createLexemByTypeAndName(lexemType, lexemValue);
+        Resource firstLexem = getFirstLexemOfPrototypeCode(code);
+        if (firstLexem == null)
+        {
+            setFirstLexemToPrototypeCode(code, lexem);
+        }
+        else
+        {
+            setLastLexemOfPrototypeCode(code, lexem);
+        }
+
+        answ.put("correct","true");
+        answ.put("message",getLexemSequenceString(code));
         return answ;
+    }
+
+    private String getLexemSequenceString(Resource code)
+    {
+
+        Resource lexem = getFirstLexemOfPrototypeCode(code);
+        String res = lexem.toString();
+        Resource nextLexem = nextLexemOf(lexem);
+
+        while (nextLexem!=null)
+        {
+            lexem = nextLexem;
+            res += " " + lexem.toString();
+            nextLexem = nextLexemOf(lexem);
+        }
+
+        return res;
+    }
+
+    private void removeLastLexem(Resource code)
+    {
+        ArrayList<Resource> lexems = new ArrayList<>();
+        Resource lexem = getFirstLexemOfPrototypeCode(code);
+        Resource nextLexem = nextLexemOf(lexem);
+        lexems.add(lexem);
+
+        while (nextLexem!=null)
+        {
+            lexem = nextLexem;
+            lexems.add(lexem);
+            nextLexem = nextLexemOf(lexem);
+        }
+        if (lexems.size()>=2) {
+            Resource preLastLexem = lexems.get(lexems.size() - 2);
+            preLastLexem.removeAll(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem"));
+        }
+        if (lexems.size() == 1)
+        {
+            code.removeAll(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"));
+        }
+
+    }
+
+    private Resource getLastLexemOfPrototypeCode(Resource code)
+    {
+        Resource lexem = getFirstLexemOfPrototypeCode(code);
+        Resource nextLexem = nextLexemOf(lexem);
+
+        while (nextLexem!=null)
+        {
+            lexem = nextLexem;
+            nextLexem = nextLexemOf(lexem);
+        }
+
+        return lexem;
+    }
+
+    private void setLastLexemOfPrototypeCode(Resource code, Resource lexem)
+    {
+        Resource lastLexem = getLastLexemOfPrototypeCode(code);
+        setNextLexem(lastLexem, lexem);
+    }
+
+    private void setNextLexem(Resource lexem, Resource nextLexem)
+    {
+        lexem.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem"), nextLexem);
+    }
+
+    private Resource nextLexemOf(Resource lexem)
+    {
+        if (!lexem.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem")))
+            return null;
+        Resource nextLexem = lexem.getProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem")).getResource();
+        return nextLexem;
+    }
+
+    private Resource getFirstLexemOfPrototypeCode(Resource code)
+    {
+        if (!code.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem")))
+            return null;
+        return code.getProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem")).getResource();
+    }
+
+    private void setFirstLexemToPrototypeCode(Resource code, Resource lexem)
+    {
+        code.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"), lexem);
     }
 
     public Resource createLexemByTypeAndName(String lexemType, String lexemValue)
