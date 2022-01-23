@@ -40,6 +40,7 @@ public class Problem {
     protected static String DATA_PRESENTATION_RULES = "rules/data_presentation.rules";
     protected static String PARAMETERS_RETURNS_RULES = "rules/parameters_returns.rules";
     protected static String TYPES_RULES = "rules/types.rules";
+    protected static String PROTOTYPE_RULES = "rules/prototype.rules";
 
     protected static String DATA_TRANSFER_METHOD_RETURN = "return";
     protected static String DATA_TRANSFER_METHOD_READ_ONLY = "read-only";
@@ -101,6 +102,9 @@ public class Problem {
 
         //Ризонер для интерации 4 "Выбор типов параметров и возвращаемого значения"
         reasoners[4] = createReasonerForInteraction(TYPES_RULES);
+
+        //Ризонер для интеракции 5 "Написание прототипа функции"
+        reasoners[5] = createReasonerForInteraction(PROTOTYPE_RULES);
 
 
         inf = ModelFactory.createOntologyModel( OWL_MEM_MICRO_RULE_INF, model);
@@ -702,8 +706,35 @@ public class Problem {
         Resource student = addStudent(studentID);
         Resource code = getStudentsPrototypeCode(studentID);
         removeLastLexem(code);
-        answ.put("correct","true");
-        answ.put("message",getLexemSequenceString(code));
+
+        infModel = ModelFactory.createInfModel(reasoners[5], inf);
+
+        String queryString=
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#>" +
+                        "SELECT ?message ?correct WHERE " +
+                        "{" +
+                        "?student a so:Student . " +
+                        " ?student so:hasID \""+studentID+"\" . " +
+                        "?code a lo:PrototypeCode . " +
+                        "?code so:ofStudent ?student . " +
+                        "?code so:hasMessage ?message . " +
+                        "?code so:isCorrectAnswer ?correct . " +
+                        "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            answ.put("message", qs.get("?message").asLiteral().getString());
+            answ.put("correct", (qs.get("?correct").asLiteral().getInt()==1) ? "true" : "false" );
+        }
+        infModel.toString();
+        answ.put("code", getLexemSequenceString(code));
+
         return answ;
     }
     public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemType, String lexemValue)
@@ -721,9 +752,34 @@ public class Problem {
         {
             setLastLexemOfPrototypeCode(code, lexem);
         }
+        infModel = ModelFactory.createInfModel(reasoners[5], inf);
 
-        answ.put("correct","true");
-        answ.put("message",getLexemSequenceString(code));
+        String queryString=
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#>" +
+                        "SELECT ?message ?correct WHERE " +
+                        "{" +
+                        "?student a so:Student . " +
+                        " ?student so:hasID \""+studentID+"\" . " +
+                        "?code a lo:PrototypeCode . " +
+                        "?code so:ofStudent ?student . " +
+                        "?code so:hasMessage ?message . " +
+                        "?code so:isCorrectAnswer ?correct . " +
+                        "}";
+
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            answ.put("message", qs.get("?message").asLiteral().getString());
+            answ.put("correct", (qs.get("?correct").asLiteral().getInt()==1) ? "true" : "false" );
+        }
+        infModel.toString();
+        answ.put("code", getLexemSequenceString(code));
+
         return answ;
     }
 
@@ -737,7 +793,7 @@ public class Problem {
         while (nextLexem!=null)
         {
             lexem = nextLexem;
-            res += " " + lexem.toString();
+            res += " " + lexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().toString();
             nextLexem = nextLexemOf(lexem);
         }
 
