@@ -1,5 +1,6 @@
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.apache.jena.base.Sys;
+import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
@@ -758,7 +759,7 @@ public class Problem {
                 "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                         "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
                         "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#>" +
-                        "SELECT ?message ?correct WHERE " +
+                        "SELECT ?message ?correct ?code WHERE " +
                         "{" +
                         "?student a so:Student . " +
                         " ?student so:hasID \""+studentID+"\" . " +
@@ -776,6 +777,28 @@ public class Problem {
             QuerySolution qs = rs.next();
             answ.put("message", qs.get("?message").asLiteral().getString());
             answ.put("correct", (qs.get("?correct").asLiteral().getInt()==1) ? "true" : "false" );
+
+            ArrayList<String> propertyURIs = new ArrayList<>();
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramTypeIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#openBracketIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#closeBracketIsCompleted");
+            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted");
+            Resource modifiedCode = qs.get("?code").asResource();
+
+            for (String property:
+                 propertyURIs) {
+                if (modifiedCode.hasProperty(infModel.getProperty(property))) {
+                    DatatypeProperty hasReturnType = inf.getDatatypeProperty(property);
+                    code.addProperty(hasReturnType, inf.createTypedLiteral(1));
+                    //System.out.println("Code has return value: " + code.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted")).getLiteral().getInt());
+                }
+            }
+
+
+
         }
         infModel.toString();
         answ.put("code", getLexemSequenceString(code));
@@ -785,15 +808,16 @@ public class Problem {
 
     private String getLexemSequenceString(Resource code)
     {
-
+        String res = "";
         Resource lexem = getFirstLexemOfPrototypeCode(code);
-        String res = lexem.toString();
+        if (lexem != null)
+            res = lexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().getString();
         Resource nextLexem = nextLexemOf(lexem);
 
         while (nextLexem!=null)
         {
             lexem = nextLexem;
-            res += " " + lexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().toString();
+            res += " " + lexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().getString();
             nextLexem = nextLexemOf(lexem);
         }
 
