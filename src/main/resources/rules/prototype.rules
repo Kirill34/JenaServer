@@ -195,26 +195,7 @@
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
 
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, после типа параметра должно быть его имя ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
 
-    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
-    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?value)
-    noValue(?paramChoise http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode ?code)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?paramChoise http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode ?code)
-]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
@@ -228,12 +209,31 @@
     noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
     noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
 
-    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
-    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?value)
-    (?paramChoise http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode ?code)
+    (?lexem3 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?lexem3 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem4)
+    (?lexem3 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value2)
+    equal(?value, ?value2)
+
     ->
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
+    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
+    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
+    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
+    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
+    strConcat("Молодец, после типа параметра должно быть его имя ",?value, ?message)
+    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+
 ]
 
 [
