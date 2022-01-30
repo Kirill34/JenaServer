@@ -436,13 +436,14 @@ public class Problem {
             {
                 String queryStringElementName = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                         "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                        "SELECT ?mission ?element ?notfound ?interaction WHERE " +
+                        "SELECT ?mission ?name ?element ?notfound ?interaction WHERE " +
                         "{ " +
                         "?phrase a po:Phrase . " +
                         "?phrase po:hasLeftBorder " + leftBorderNumLexem + " ." +
                         "?phrase po:hasRightBorder " + rightBorderNumLexem + " ." +
                         "?phrase po:describe ?element . " +
                         "?element po:mission ?mission . " +
+                        "?element po:name ?name . " +
                         "?student a so:Student . " +
                         " ?student so:hasID \""+studentID+"\" . " +
                         "?student so:notFoundElementsCount ?notfound . " +
@@ -454,9 +455,14 @@ public class Problem {
                 if (rsElementName.hasNext())
                 {
                     QuerySolution qsElementName  = rsElementName.next();
-                    Literal nameLit = qsElementName.get("?mission").asLiteral();
+                    Literal missionLit = qsElementName.get("?mission").asLiteral();
+                    String mission = missionLit.getString();
+                    result.put("mission", mission);
+
+                    Literal nameLit = qsElementName.get("?name").asLiteral();
                     String name = nameLit.getString();
-                    result.put("mission", name);
+                    result.put("name", name);
+
                     Resource element = qsElementName.get("?element").asResource();
                     student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement"), element);
                     int notFound = qsElementName.get("?notfound").asLiteral().getInt();
