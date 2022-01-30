@@ -1,0 +1,315 @@
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "return")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем возвращать <> ? Его же функция принимает на вход ")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "return")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "return")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как вы собираетесь обновлять <>, если это возвращаемое значение?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-write")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изменяется в данной функции?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "write-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> вычисляется в данной функции?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+
+
+
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изначально известен?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-write")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изменяется в данной функции?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "write-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+
+
+
+
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> не будет изменяться в данной функции?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "read-write")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+
+    (?choose rdf:type http://www.semanticweb.org/problem-ontology#PresentationChoose)
+    (?choose http://www.semanticweb.org/problem-ontology#ofDataElement ?element)
+    (?choose http://www.semanticweb.org/problem-ontology#chosenPresentation ?presentation)
+    (?choose http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#name ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasComponentName ?componentName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasTransferMethod ?trMethod)
+    equal(?trMethod, "write-only")
+    ->
+    print(?component," method: ",?trMethod)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изначально неизвестен?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]

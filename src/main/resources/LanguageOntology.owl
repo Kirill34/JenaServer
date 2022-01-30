@@ -1,0 +1,626 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"
+     xml:base="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:language-ontology="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayOf"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#closeBracketIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#closeBracketIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasParamCount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasParamCount"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasStage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasStage"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#max"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#name"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#openBracketIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#openBracketIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramTypeIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramTypeIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ArrayLengthLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ArrayLengthLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BeginLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BeginLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CharLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CharLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseSquareBracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseSquareBracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SquareBracketLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Const -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Const">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeModifier"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Double -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Double">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#DoubleLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#DoubleLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#EndLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#EndLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Float -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Float">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FloatLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FloatLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IDLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IDLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IDLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LongLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LongLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenSquareBracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenSquareBracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SquareBracketLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IDLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SemicolonLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SemicolonLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Short -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Short">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ShortLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ShortLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SquareBracketLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SquareBracketLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Struct -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Struct">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IDLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeModifier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeModifier"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedChar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedChar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedInt -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedInt">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedLong -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedLong">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedShort -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedShort">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Short"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Unsigned"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_ArrayInt3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_ArrayInt3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array"/>
+        <arrayOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int"/>
+        <arrayLength rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</arrayLength>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Char -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Char">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Float -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Float">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Float"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToInt -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToInt">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer"/>
+        <pointsTo rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_StructDate -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_StructDate">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Struct"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Date</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_UnsignedInt -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_UnsignedInt">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#UnsignedInt"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
