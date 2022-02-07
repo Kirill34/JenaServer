@@ -212,6 +212,42 @@ public class Problem {
         returnValueChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
     }
 
+    public HashMap<String, String> getStudentComponentsOfDataElement(String studentID, String elementName)
+    {
+        HashMap<String, String> components = new HashMap<>();
+
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?name ?mission WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?choose a po:PresentationChoose . " +
+                "?choose so:ofStudent ?student . " +
+                "?choose po:ofDataElement ?de . " +
+                "?choose po:chosenPresentation ?pres . " +
+                "?de po:hasPresentation ?pres . " +
+                "?de a po:DataElement . " +
+                "?de po:name \""+elementName+"\" . " +
+                "?de po:mission ?demission . " +
+                "?pres po:hasComponent ?comp . " +
+                "?comp po:name ?name ." +
+                "?comp po:mission ?mission . " +
+                "} ";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        while (rs.hasNext())
+        {
+            System.out.println("Number count: "+rs.getRowNumber());
+            QuerySolution qs = rs.next();
+            components.put(qs.get("?name").toString(), qs.get("?mission").toString());
+        }
+        System.out.println("Components: ");
+        System.out.println(components);
+        return components;
+    }
+
     public HashMap<String, String> getStudentComponents(String studentID)
     {
         HashMap<String, String> components = new HashMap<>();

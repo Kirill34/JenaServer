@@ -72,6 +72,33 @@
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
 ]
 
+[
+    noValue(?return rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Да, должен быть void")
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
+]
+
+[
+    noValue(?return rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    noValue(?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве у этой функции есть возвращаемое значение?")
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 0)
+]
 
 
 [

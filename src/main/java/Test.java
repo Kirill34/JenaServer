@@ -135,7 +135,13 @@ public class Test {
 
                 if (param_value.containsKey("componentList"))
                 {
-                    answ = problem.getStudentComponents("1");
+                    if (param_value.containsKey("elementName"))
+                    {
+                        answ = problem.getStudentComponentsOfDataElement("1", param_value.get("elementName"));
+                    }
+                    else {
+                        answ = problem.getStudentComponents("1");
+                    }
                 }
                 if (param_value.containsKey("paramList"))
                 {
