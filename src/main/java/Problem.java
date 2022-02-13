@@ -623,7 +623,7 @@ public class Problem {
         String queryString=
                 "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT ?correct ?message WHERE " +
+                "SELECT ?correct ?answ WHERE " +
                 "{" +
                 "?student a so:Student . " +
                 " ?student so:hasID \""+studentID+"\" . " +
@@ -643,7 +643,8 @@ public class Problem {
             int s = qs.get("?correct").asLiteral().getInt();
             answ.put("correct", (s == 1) ? "true" : "false");
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
-            answ.put("message", qs.get("?message").asLiteral().getString());
+            Resource answExemplar = qs.get("?answ").asResource();
+            answ.put("message", getErrorString(answExemplar) );
 
             if (s==1 && (parameterOrReturn.equals("read-only") || parameterOrReturn.equals("write-only") || parameterOrReturn.equals("read-write")))
             {
@@ -987,7 +988,7 @@ public class Problem {
     {
         HashSet<RDFNode> classes = getErrorClasses(answer);
         HashMap<String, RDFNode> ontClasses = new HashMap<>();
-        String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable"};
+        String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable","CantReturn", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent"};
 
         for (String name: classNames)
         {
@@ -997,8 +998,18 @@ public class Problem {
 
         String elementName = answer.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName")).getLiteral().getString();
         Resource element = findDataElementByName(elementName);
+
+
         assert element != null;
         String mission = element.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission")).getLiteral().getString();
+        String componentMission = "";
+
+        if (answer.hasProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasComponentName"))) {
+            String componentName = answer.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasComponentName")).getLiteral().getString();
+            Resource component = findComponentByName("1", elementName, componentName);
+            if (component != null)
+                componentMission = component.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission")).getLiteral().getString();
+        }
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
             return "Разве "+ mission +" вычисляется?";
@@ -1023,6 +1034,42 @@ public class Problem {
         {
             return "Разве "+ mission +" не используется для вычисления?";
         }
+
+        if (classes.contains(ontClasses.get("CantReturn")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+        }
+
+        if (classes.contains(ontClasses.get("InputParameterForOutputComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+        }
+
+        if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+        }
+
+        if (classes.contains(ontClasses.get("OutputParameterForUpdatableComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" не используется для вычисления?";
+        }
+
+        if (classes.contains(ontClasses.get("OutputParameterForInputComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+        }
+
+        if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" не вычисляется заново?";
+        }
+
+        if (classes.contains(ontClasses.get("InputParameterForOutputComponent")))
+        {
+            return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+        }
+
         return "Описание ошибки";
     }
 

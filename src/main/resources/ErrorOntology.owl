@@ -38,6 +38,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturn -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturn">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput">
@@ -68,6 +76,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FewReturnValues -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FewReturnValues">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection">
@@ -84,6 +100,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput">
@@ -96,6 +120,54 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectUpdatable">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForOutputComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForOutputComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForUpdatableComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForUpdatableComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForInputComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForInputComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForUpdatableComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForUpdatableComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForInputComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForInputComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForOutputComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForOutputComponent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
     </owl:Class>
 </rdf:RDF>
 
