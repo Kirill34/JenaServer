@@ -1,4 +1,7 @@
+import com.sun.org.apache.bcel.internal.generic.Select;
+import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector;
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import jdk.nashorn.internal.objects.annotations.Where;
 import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
@@ -10,6 +13,7 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
 import org.apache.jena.reasoner.rulesys.Rule;
 import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.vocabulary.OWL2;
 
 import javax.jws.WebParam;
@@ -525,7 +529,7 @@ public class Problem {
         infModel = ModelFactory.createInfModel(reasoners[1], inf);
         String queryString="PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT ?correct ?message WHERE " +
+                "SELECT ?correct ?message ?answ WHERE " +
                 "{" +
                 "?student a so:Student . " +
                 " ?student so:hasID \""+studentID+"\" . " +
@@ -546,6 +550,19 @@ public class Problem {
             answ.put("correct", (s == 1) ? "true" : "false");
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             answ.put("message", qs.get("?message").asLiteral().getString());
+            Resource answExemplar = qs.getResource("?answ").asResource();
+            Resource error = answExemplar.getPropertyResourceValue(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError"));
+            StmtIterator stmtit = error.listProperties();
+            while (stmtit.hasNext())
+            {
+                Statement stmt = stmtit.next();
+                //System.out.println(stmt);
+                //System.out.println(stmt.getPredicate().getURI());
+                if (stmt.getPredicate().getURI().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
+                {
+                    System.out.println(stmt.getObject());
+                }
+            }
         }
         infModel.toString();
         //answ.put("correct","true");
