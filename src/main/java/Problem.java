@@ -39,6 +39,7 @@ public class Problem {
     protected static String PROBLEM_ONTOLOGY_FILE = "ProblemOntology.owl";
     protected static String SESSION_ONTOLOGY_FILE = "SessionOntology.owl";
     protected static String LANGUAGE_ONTOLOGY_FILE = "LanguageOntology.owl";
+    protected static String ERROR_ONTOLOGY_FILE = "ErrorOntology.owl";
 
     protected static String DATA_DIRECTION_RULES = "rules/data_direction.rules";
     protected static String ELEMENT_BORDERS_RULES = "rules/element_borders.rules";
@@ -89,8 +90,10 @@ public class Problem {
         Model problemModel = readModel(PROBLEM_ONTOLOGY_FILE);
         Model sessionModel = readModel(SESSION_ONTOLOGY_FILE);
         Model languageModel = readModel(LANGUAGE_ONTOLOGY_FILE);
+        Model errorModel = readModel(ERROR_ONTOLOGY_FILE);
         model = ModelFactory.createUnion(problemModel, sessionModel);
         model = ModelFactory.createUnion(model, languageModel);
+        model = ModelFactory.createUnion(model, errorModel);
 
 
         //Ризонер для интеракции 0 "Выделение элементов данных из текста"
