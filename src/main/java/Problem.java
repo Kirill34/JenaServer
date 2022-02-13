@@ -986,15 +986,42 @@ public class Problem {
     private String getErrorString(Resource answer)
     {
         HashSet<RDFNode> classes = getErrorClasses(answer);
+        HashMap<String, RDFNode> ontClasses = new HashMap<>();
+        String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable"};
 
-        RDFNode classCorrectInput = inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput");
-        RDFNode classIncorrectOutput = inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput");
+        for (String name: classNames)
+        {
+            ontClasses.put(name, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#"+name));
+        }
+
+
         String elementName = answer.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName")).getLiteral().getString();
         Resource element = findDataElementByName(elementName);
+        assert element != null;
         String mission = element.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission")).getLiteral().getString();
-        if (classes.contains(classCorrectInput) && classes.contains(classIncorrectOutput))
+        if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
             return "Разве "+ mission +" вычисляется?";
+        }
+        if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
+        {
+            return "Разве "+ mission +" вычисляется?";
+        }
+        if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
+        {
+            return "Разве "+ mission +" известен?";
+        }
+        if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectInput")))
+        {
+            return "Разве "+ mission +" известен?";
+        }
+        if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectInput")))
+        {
+            return "Разве "+ mission +" не вычисляется заново?";
+        }
+        if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectOutput")))
+        {
+            return "Разве "+ mission +" не используется для вычисления?";
         }
         return "Описание ошибки";
     }
