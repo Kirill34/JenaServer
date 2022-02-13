@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.apache.jena.ontology.OntModelSpec.OWL_MEM_MICRO_RULE_INF;
@@ -552,20 +553,8 @@ public class Problem {
             int s = qs.get("?correct").asLiteral().getInt();
             answ.put("correct", (s == 1) ? "true" : "false");
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
-            answ.put("message", qs.get("?message").asLiteral().getString());
             Resource answExemplar = qs.getResource("?answ").asResource();
-            Resource error = answExemplar.getPropertyResourceValue(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError"));
-            StmtIterator stmtit = error.listProperties();
-            while (stmtit.hasNext())
-            {
-                Statement stmt = stmtit.next();
-                //System.out.println(stmt);
-                //System.out.println(stmt.getPredicate().getURI());
-                if (stmt.getPredicate().getURI().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
-                {
-                    System.out.println(stmt.getObject());
-                }
-            }
+            answ.put("message", getErrorString(answExemplar));
         }
         infModel.toString();
         //answ.put("correct","true");
@@ -992,6 +981,39 @@ public class Problem {
         code.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
         code.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode"));
         return code;
+    }
+
+    private String getErrorString(Resource answer)
+    {
+        HashSet<RDFNode> classes = getErrorClasses(answer);
+
+        RDFNode classCorrectInput = inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput");
+        RDFNode classIncorrectOutput = inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput");
+        String elementName = answer.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName")).getLiteral().getString();
+        Resource element = findDataElementByName(elementName);
+        String mission = element.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission")).getLiteral().getString();
+        if (classes.contains(classCorrectInput) && classes.contains(classIncorrectOutput))
+        {
+            return "Разве "+ mission +" вычисляется?";
+        }
+        return "Описание ошибки";
+    }
+
+    private HashSet<RDFNode> getErrorClasses(Resource answer)
+    {
+        HashSet<RDFNode> classes = new HashSet<>();
+        if (answer.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError"))) {
+            Resource error = answer.getPropertyResourceValue(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError"));
+            StmtIterator stmtit = error.listProperties();
+
+            while (stmtit.hasNext()) {
+                Statement stmt = stmtit.next();
+                if (stmt.getPredicate().getURI().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+                    classes.add(stmt.getObject());
+                }
+            }
+        }
+        return classes;
     }
 
 }
