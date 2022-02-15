@@ -554,7 +554,7 @@ public class Problem {
             answ.put("correct", (s == 1) ? "true" : "false");
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             Resource answExemplar = qs.getResource("?answ").asResource();
-            answ.put("message", getErrorString(answExemplar));
+            answ.put("message", getErrorString(answExemplar, Language.EN));
         }
         infModel.toString();
         //answ.put("correct","true");
@@ -599,8 +599,17 @@ public class Problem {
         }
         infModel.toString();
          */
-        answ.put("correct","true");
-        answ.put("message","Верно");
+
+        if ((elementName.equals("first_school_day") || elementName.equals("birthday")) && presentationName.equals("freefields2"))
+        {
+            answ.put("correct", "false");
+            answ.put("message","Characteristic \"year\" is not presented");
+        }
+        else
+        {
+            answ.put("correct","true");
+            answ.put("message","Верно");
+        }
 
         setPresenatitionForStudent(studentID, elementName, presentationName);
 
@@ -644,7 +653,7 @@ public class Problem {
             answ.put("correct", (s == 1) ? "true" : "false");
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             Resource answExemplar = qs.get("?answ").asResource();
-            answ.put("message", getErrorString(answExemplar) );
+            answ.put("message", getErrorString(answExemplar, Language.EN) );
 
             if (s==1 && (parameterOrReturn.equals("read-only") || parameterOrReturn.equals("write-only") || parameterOrReturn.equals("read-write")))
             {
@@ -984,7 +993,7 @@ public class Problem {
         return code;
     }
 
-    private String getErrorString(Resource answer)
+    private String getErrorString(Resource answer, Language language)
     {
         HashSet<RDFNode> classes = getErrorClasses(answer);
         HashMap<String, RDFNode> ontClasses = new HashMap<>();
@@ -1012,62 +1021,101 @@ public class Problem {
         }
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
-            return "Разве "+ mission +" вычисляется?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" вычисляется?";
+            if (language == Language.EN)
+                return "Is \"" + mission + "\" calculable?";
         }
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
-            return "Разве "+ mission +" вычисляется?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" вычисляется?";
+            if (language == Language.EN)
+                return "Is \"" + mission + "\" calculable?";
         }
         if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
-            return "Разве "+ mission +" известен?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" известен?";
+            if (language == Language.EN)
+                return "Is \"" + mission + "\" initialized?";
         }
         if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectInput")))
         {
-            return "Разве "+ mission +" известен?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" известен?";
+            if (language == Language.EN)
+                return "Is \"" + mission + "\" initialized?";
         }
         if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectInput")))
         {
-            return "Разве "+ mission +" не вычисляется заново?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" не вычисляется заново?";
+            if (language == Language.EN)
+                return  "Is \"" + mission + "\" not calculated?";
         }
         if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
-            return "Разве "+ mission +" не используется для вычисления?";
+            if (language == Language.RU)
+                return "Разве "+ mission +" не вычисляется заново?";
+            if (language == Language.EN)
+                return  "Is \"" + mission + "\" not calculated?";
         }
 
         if (classes.contains(ontClasses.get("CantReturn")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForOutputComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" initialized?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
         }
 
         if (classes.contains(ontClasses.get("OutputParameterForUpdatableComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" не используется для вычисления?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" не используется для вычисления?";
+            if (language == Language.EN)
+                return  "Is \""+mission+"\".\""+componentMission+"\" used for calculations?";
         }
 
         if (classes.contains(ontClasses.get("OutputParameterForInputComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" не вычисляется заново?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +"не используется для вычислений?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" not used for calculations?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForOutputComponent")))
         {
-            return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+            if (language == Language.RU)
+                return "Разве "+ mission + "(" + componentMission + ")" +" известен?";
+            if (language == Language.EN)
+                return "Is \""+mission+"\".\""+componentMission+"\" initialized?";
         }
 
         return "Описание ошибки";

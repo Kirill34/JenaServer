@@ -21,6 +21,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataComponent"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement"/>

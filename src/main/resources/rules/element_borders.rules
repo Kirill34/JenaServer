@@ -14,6 +14,7 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 equal(?lba, ?lb)
 equal(?rba, ?rb)
+equal(?rba, ?rb)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount ?foundCount)
 difference(?foundCount, '1'^^http://www.w3.org/2001/XMLSchema#int, ?newFoundCount)
 
@@ -38,13 +39,15 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
+(?element http://www.semanticweb.org/problem-ontology#mission ?mission)
+strConcat("Data element \"", ?mission, "\" is already defined", ?errorMessage)
 equal(?lba, ?lb)
 equal(?rba, ?rb)
 noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
 ->
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Вы уже выделили этот элемент данных")
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMessage)
 ]
 
 
@@ -66,7 +69,7 @@ lessThan(?rba, ?rb)
 ->
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком мало... Думайте еще...")
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "There is very short phrase is selected in the text. It describes data element partly.")
 ]
 
 [
