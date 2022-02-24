@@ -438,7 +438,7 @@
     noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
     noValue(?lexem2 rdf:type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
     (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Разве ", ?value, "это тип параметра?", ?message)
+    strConcat("Is \"", ?value, "\" a type of function parameter?", ?message)
     noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
     ->
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)

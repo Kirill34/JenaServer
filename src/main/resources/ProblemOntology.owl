@@ -102,6 +102,18 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstField"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasFormulation -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFormulation"/>
@@ -129,6 +141,18 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasInvalidPresentation">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasDomainTypePresentation"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextField"/>
     
 
 
@@ -561,8 +585,8 @@
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
-        <mission>Birthday</mission>
-        <name>birthday</name>
+        <mission>Date of birth</mission>
+        <name>date_of_birth</name>
     </owl:NamedIndividual>
     
 
@@ -571,8 +595,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_Date"/>
-        <mission>Entity with 3 characteristics: day (number), month (number), year (number)</mission>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_Date"/>
+        <mission>An entity with 3 characteristics: day (number), month (number), year (number)</mission>
         <name>entity</name>
     </owl:NamedIndividual>
     
@@ -582,9 +606,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
         <mission>3 scalars: day (number), month (number), year (number)</mission>
         <name>freefields</name>
     </owl:NamedIndividual>
@@ -595,8 +617,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields"/>
         <mission>2 scalars: day (number), month (number)</mission>
         <name>freefields2</name>
     </owl:NamedIndividual>
@@ -615,7 +636,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
-        <hasComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays"/>
         <mission>Number</mission>
         <name>number</name>
     </owl:NamedIndividual>
@@ -649,6 +670,31 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity"/>
         <mission>Number of day</mission>
         <name>day</name>
     </owl:NamedIndividual>
@@ -660,6 +706,30 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity"/>
         <mission>Number of month</mission>
         <name>month</name>
     </owl:NamedIndividual>
@@ -677,6 +747,17 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber"/>
+        <mission>Number of year</mission>
+        <name>year</name>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#DaysCount -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DaysCount">
@@ -684,7 +765,7 @@
         <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number"/>
-        <mission>Count of days between days</mission>
+        <mission>Count of days between dates</mission>
         <name>dayscount</name>
     </owl:NamedIndividual>
     
@@ -694,9 +775,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_Date">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Entity"/>
-        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
-        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
-        <hasEntityField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
+        <hasFirstField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity"/>
         <name>date</name>
     </owl:NamedIndividual>
     
@@ -762,8 +841,8 @@
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
         <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
-        <mission>First day at school</mission>
-        <name>firstschooldday</name>
+        <mission>First date at school</mission>
+        <name>first_date_at_school</name>
     </owl:NamedIndividual>
     
 
@@ -773,8 +852,8 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_Birthday">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
         <describe rdf:resource="http://www.semanticweb.org/problem-ontology#Birthday"/>
-        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</hasLeftBorder>
-        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</hasRightBorder>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</hasRightBorder>
     </owl:NamedIndividual>
     
 
@@ -784,8 +863,8 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_DaysCount">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
         <describe rdf:resource="http://www.semanticweb.org/problem-ontology#DaysCount"/>
-        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</hasLeftBorder>
-        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</hasRightBorder>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</hasRightBorder>
     </owl:NamedIndividual>
     
 
@@ -795,8 +874,8 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_FirstSchoolDay">
         <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
         <describe rdf:resource="http://www.semanticweb.org/problem-ontology#FirstSchoolDay"/>
-        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</hasLeftBorder>
-        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</hasRightBorder>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</hasRightBorder>
     </owl:NamedIndividual>
     
 
@@ -809,7 +888,7 @@
         <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#Birthday"/>
         <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#FirstSchoolDay"/>
         <hasOutputData rdf:resource="http://www.semanticweb.org/problem-ontology#DaysCount"/>
-        <hasFullText>Create prototype of the function what calculates count of days between birthday and first day at school</hasFullText>
+        <hasFullText>Create a prototype for the function that calculates the count of days between the birth date and the first date at school</hasFullText>
     </owl:NamedIndividual>
 </rdf:RDF>
 

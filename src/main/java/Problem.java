@@ -201,12 +201,15 @@ public class Problem {
     {
         Resource student = addStudent(studentID);
         Resource component = findComponentByName(studentID, elementName, componentName);
+        String paramName =
+                (getStudentComponentsOfDataElement(studentID, elementName).size()>1) ?
+                elementName + "_" + componentName : elementName;
 
         Individual parameterChoose = inf.createIndividual(inf.createResource());
         parameterChoose.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#ParameterChoose"));
         parameterChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#chosenComponent"), component);
         parameterChoose.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
-        parameterChoose.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), elementName + "_" + componentName);
+        parameterChoose.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), paramName);
     }
 
     private void addReturnValueForStudent(String studentID, String elementName, String componentName)
@@ -238,10 +241,10 @@ public class Problem {
                 "?de a po:DataElement . " +
                 "?de po:name \""+elementName+"\" . " +
                 "?de po:mission ?demission . " +
-                "?pres po:hasComponent ?comp . " +
+                "?pres po:hasFirstComponent ?comp . " +
                 "?comp po:name ?name ." +
                 "?comp po:mission ?mission . " +
-                "} ";
+                "} ORDER BY DESC(?name)";
         Query query = QueryFactory.create(queryString);
         QueryExecution qExec = QueryExecutionFactory.create(query, inf);
         ResultSet rs = qExec.execSelect();
@@ -274,7 +277,7 @@ public class Problem {
                 "?de a po:DataElement . " +
                 "?de po:name ?dename . " +
                 "?de po:mission ?demission . " +
-                "?pres po:hasComponent ?comp . " +
+                "?pres po:hasFirstComponent ?comp . " +
                 "?comp po:name ?name ." +
                 "?comp po:mission ?mission . " +
                 "} ";
@@ -374,7 +377,7 @@ public class Problem {
                 "?de a po:DataElement . " +
                 "?problem a po:Problem . " +
                 "?de po:name " + "\"" + dataElementName + "\" . " +
-                "?pres po:hasComponent ?comp . " +
+                "?pres po:hasFirstComponent ?comp . " +
                 "?comp po:name \"" + componentName + "\" . " +
                 "} ";
         Query query = QueryFactory.create(queryString);
@@ -570,9 +573,9 @@ public class Problem {
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasElementName"), elementName);
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasPresentationName"), presentationName);
-       // infModel = ModelFactory.createInfModel(reasoners[2], inf);
+        infModel = ModelFactory.createInfModel(reasoners[2], inf);
 
-        /*
+
         String queryString="PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
                 "SELECT ?correct ?message WHERE " +
@@ -598,18 +601,18 @@ public class Problem {
             answ.put("message", qs.get("?message").asLiteral().getString());
         }
         infModel.toString();
-         */
 
-        if ((elementName.equals("first_school_day") || elementName.equals("birthday")) && presentationName.equals("freefields2"))
+        /*
+        if ((elementName.equals("first_date_at_school") || elementName.equals("date_of_birth")) && presentationName.equals("freefields2"))
         {
             answ.put("correct", "false");
-            answ.put("message","Characteristic \"year\" is not presented");
+            answ.put("message","A property \"year\" is not implemented.");
         }
         else
         {
             answ.put("correct","true");
             answ.put("message","Верно");
-        }
+        }*/
 
         setPresenatitionForStudent(studentID, elementName, presentationName);
 
@@ -1024,14 +1027,14 @@ public class Problem {
             if (language == Language.RU)
                 return "Разве "+ mission +" вычисляется?";
             if (language == Language.EN)
-                return "Is \"" + mission + "\" calculable?";
+                return "Should \"" + mission + "\" be calculated by the function?";
         }
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
             if (language == Language.RU)
                 return "Разве "+ mission +" вычисляется?";
             if (language == Language.EN)
-                return "Is \"" + mission + "\" calculable?";
+                return "Should \"" + mission + "\" be calculated by the function?";
         }
         if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
@@ -1052,7 +1055,7 @@ public class Problem {
             if (language == Language.RU)
                 return "Разве "+ mission +" не вычисляется заново?";
             if (language == Language.EN)
-                return  "Is \"" + mission + "\" not calculated?";
+                return  "Should the \""+mission+"\" be calculated by the function?";
         }
         if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
@@ -1067,7 +1070,7 @@ public class Problem {
             if (language == Language.RU)
                 return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
             if (language == Language.EN)
-                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
+                return "Should \""+mission+"\".\""+componentMission+"\" be calculated by the function?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForOutputComponent")))
@@ -1083,7 +1086,7 @@ public class Problem {
             if (language == Language.RU)
                 return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
             if (language == Language.EN)
-                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
+                return "Should \""+mission+"\".\""+componentMission+"\" be calculated by the function?";
         }
 
         if (classes.contains(ontClasses.get("OutputParameterForUpdatableComponent")))
@@ -1099,7 +1102,7 @@ public class Problem {
             if (language == Language.RU)
                 return "Разве "+ mission + "(" + componentMission + ")" +" вычисляется?";
             if (language == Language.EN)
-                return "Is \""+mission+"\".\""+componentMission+"\" calculatable?";
+                return "Should \""+mission+"\".\""+componentMission+"\" be calculated by the function?";
         }
 
         if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))

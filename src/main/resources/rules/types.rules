@@ -1,4 +1,26 @@
 [
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?component)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    print("First component founded")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?element http://www.semanticweb.org/problem-ontology#hasPresentation ?presentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+    print("yet component founded")
+]
+
+[
     (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
     (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
     (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
@@ -81,9 +103,9 @@
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
     (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointsTo)
     (?pointsTo rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
-
+    strConcat("Do you want to change the \"", ?paramName ,"\" using a pointer?", ?errorMessage)
     ->
-    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Обычно указатели используют для передачи массивов или выходных параметров? Вам зачем указатель?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMessage)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
 
